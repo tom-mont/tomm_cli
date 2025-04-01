@@ -12,16 +12,15 @@ impl Config {
         if args.len() < 3 {
             return Err("Too few arguments");
         }
-        let query = args[1].clone();
-        let file_path = args[2].clone();
+        let query: String = args[1].clone();
+        let file_path: String = args[2].clone();
 
         Ok(Config { query, file_path })
     }
 }
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    let content = fs::read_to_string(config.file_path)?;
+    let content: String = fs::read_to_string(config.file_path)?;
     println!("With text: \n{content}");
     Ok(())
 }
-
