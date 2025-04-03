@@ -9,26 +9,19 @@ use std::path::PathBuf;
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 pub struct Args {
-    /// Name of the person to greet
+    // thing to remember
     #[arg(short, long)]
-    pub name: String,
-
-    /// Number of times to greet
-    #[arg(short, long, default_value_t = 1)]
-    pub count: u8,
+    pub remember: String,
 }
 
 pub fn run(args: &Args) -> Result<(), Box<dyn Error>> {
-    for _ in 0..args.count {
-        println!("Hello {}!", args.name);
-    }
-
     let mut data_string: String = "\n".to_string();
     // Before we push the argument, let's add a datetime
     let now = Local::now();
     let timestamp = now.format("(%Y-%m-%d %H:%M:%S) - ").to_string();
 
-    data_string.push_str(&timestamp); //.push_str(&args.name);
+    data_string.push_str(&timestamp);
+    data_string.push_str(&args.remember);
     let data = data_string.as_bytes();
     let mut pos = 0;
 
