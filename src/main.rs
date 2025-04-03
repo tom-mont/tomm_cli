@@ -1,17 +1,11 @@
-use std::env;
+use clap::Parser;
 use std::process;
-use tomm_cli::Config;
+use tomm_cli::Args;
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let config = Config::build(&args).unwrap_or_else(|err| {
-        eprintln!("Problem parsing arguments: {err}");
+    let args: Args = Args::parse();
+    if let Err(e) = tomm_cli::run(&args) {
+        eprintln!("CLI Error: {e}");
         process::exit(1);
-    });
-
-    if let Err(e) = tomm_cli::run(config) {
-        eprintln!("Application error: {e}");
-        process::exit(1);
-    }
+    };
 }
