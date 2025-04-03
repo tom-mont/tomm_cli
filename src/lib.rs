@@ -1,3 +1,4 @@
+use chrono::Local;
 use clap::Parser;
 use std::env;
 use std::error::Error;
@@ -23,7 +24,11 @@ pub fn run(args: &Args) -> Result<(), Box<dyn Error>> {
     }
 
     let mut data_string: String = "\n".to_string();
-    data_string.push_str(&args.name);
+    // Before we push the argument, let's add a datetime
+    let now = Local::now();
+    let timestamp = now.format("(%Y-%m-%d %H:%M:%S) - ").to_string();
+
+    data_string.push_str(&timestamp); //.push_str(&args.name);
     let data = data_string.as_bytes();
     let mut pos = 0;
 
