@@ -6,7 +6,7 @@ This repository houses a CLI tool I intend to use for personal use. The commands
 
 In the project directory run
 
-```rust
+```bash
 cargo install --path .
 ```
 
